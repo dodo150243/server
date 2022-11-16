@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello world</title>
+   </head>
+   <script src = "/socket.io/socket.io.js"></script>
+   
+   <script>
+      
+      const socket = io();
+// Add a connect listener
+socket.on('connect', function (socket) {
+    console.log('Connected!');
+
+});
+socket.emit('CH01', 'Tirawat', 'test msg');
+   </script>
+
+
+   <body>Hello</body>
+</html>
