@@ -15,7 +15,8 @@ const myskinre = {
     updateTask: function(id, Task, callback) {  
         //  return db.query("update task set Title=?,Status=? where Id=?", [Task.Title, Task.Status, id], callback);
          return db.query("update control_doe set done_on=? where id_task=?", [Task.done_on, id], callback);  
-       
+         
     } 
+    
 };  
 module.exports = myskinre;  

@@ -9,13 +9,22 @@
       
       const socket = io();
 // Add a connect listener
-socket.on('connect', function (socket) {
-    console.log('Connected!');
+// socket.on('connect', function (socket) {
+//     console.log('Connected!');
 
+// });
+socket.on("message", (arg) => {
+  var str="<div> tirawt</div>"
+  console.log(arg); // world
+  var ti = document.getElementById("d1")
+
+  const node = document.createElement("div");
+const textnode = document.createTextNode("Water");
+node.appendChild(textnode);
+document.getElementById("d1").appendChild(node);
 });
-socket.emit('CH01', 'Tirawat', 'test msg');
    </script>
 
 
-   <body>Hello</body>
+   <body id="d1">1111</body>
 </html>

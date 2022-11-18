@@ -3,6 +3,8 @@ const router = express.Router();
 const myskinre = require('../model/myskinre');  
 
 router.get('/productListDone', function(req, res, next) {  
+    // var io = req.app.get("socketio");
+    // io.emit("message", "hi!");
     myskinre.getAllOrderDone(function(err, rows) {  
             if (err) {  
                 res.json(err);  
@@ -11,20 +13,29 @@ router.get('/productListDone', function(req, res, next) {
                 console.log(rows)  
             }  
         });  
+        
+          
 });  
 
 
 
-router.put('/:id', function(req, res, next) {  
+router.put('/:id', function(req, res, next) { 
+    var io = req.app.get("socketio");
+    io.emit("message", "hi!");
     myskinre.updateTask(req.params.id, req.body, function(err, rows) {  
         if (err) {  
             res.json(err);  
         } else {  
             res.json(rows);
-            console.log({rows})  
+            
+            
         }  
+        
     });  
-});  
+});
+    
+      
+
 
 
 router.get('/:id?', function(req, res, next) {  
