@@ -1,14 +1,22 @@
 const express = require('express');  
 const router = express.Router();  
 const myskinre = require('../model/myskinre');  
+// const socketIO = require('socket.io')
+// const socket = socketIO()
+const io = require("socket.io")();
 
-router.get('/productListDone', function(req, res, next) {  
+router.get('/productListDone', function(req, res, next) { 
+    
     myskinre.getAllOrderDone(function(err, rows) {  
+        
             if (err) {  
                 res.json(err);  
-            } else {  
-                res.json(rows);  
-                console.log(rows)  
+            }
+            else {  
+                 res.json(rows);  
+                // res.json(socket);
+                // console.log(rows) 
+                
             }  
         });  
 });  
@@ -24,6 +32,10 @@ router.put('/:id', function(req, res, next) {
             console.log({rows})  
         }  
     });  
+    
+        socket.emit("hello",);
+      
+   
 });  
 
 
