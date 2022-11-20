@@ -12,10 +12,20 @@ const myskinre = {
     // deleteTask: function(id, callback) {  
     //     return db.query("delete from task where Id=?", [id], callback);  
     // },  
-    updateTask: function(id, Task, callback) {  
-        //  return db.query("update task set Title=?,Status=? where Id=?", [Task.Title, Task.Status, id], callback);
-         return db.query("update control_doe set done_on=? where id_task=?", [Task.done_on, id], callback);  
-         
+    // updateTask: function(id,data, callback) {  
+    //     //  return db.query("update task set Title=?,Status=? where Id=?", [Task.Title, Task.Status, id], callback);
+    //     // var records = [id,done_on];
+    //     // var sql = "update control_doe set done_on=? where id_task=?";
+    //     return db.query("update control_doe set done_on=? where id_task=?", [data.done_on, id], callback);  
+       
+    //     // return db.query(sql, [done_on, id], callback); 
+    // } 
+
+    updateTask: function(id,data,callback) { 
+      
+        return db.query("update control_doe set done_on=? where id_task=?", [data.done_on, id], callback,console.log(data));  
+        
+  
     } 
     
 };  

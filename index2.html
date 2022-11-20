@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello world</title>
+   </head>
+   <script src = "/socket.io/socket.io.js"></script>
+   
+   <script>
+      
+      const socket = io();
+      const api_url = "http://localhost:4000/product/productListDone";
+      async function getapi(url) {
+      const response = await fetch(url);
+      var data = await response.json();
+      console.log(data);
+      
+    }
+      getapi(api_url);
+
+// Add a connect listener
+// socket.on('connect', function (socket) {
+//     console.log('Connected!');
+
+// });
+socket.on("message", (arg) => {
+  var str=`<tr>
+          <th>id_order</th>
+          <th>item</th>
+         
+         </tr>`;
+    
+    // Loop to access all rows 
+    for (let r of data.rows) {
+        tab += `<tr> 
+    <td>${r.id_order} </td>
+    <td>${r.items}</td>
+       
+</tr>`;
+    }
+
+  
+  var ti = document.getElementById("d1")
+
+  const node = document.createElement("div");
+const textnode = document.createTextNode("Water");
+node.appendChild(textnode);
+document.getElementById("d1").appendChild(node);
+});
+
+
+
+   </script>
+
+
+   <body id="d1">1111</body>
+</html>

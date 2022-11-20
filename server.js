@@ -24,8 +24,13 @@ const io = require('socket.io')(server);
 app.set("socketio", io);
 
 app.get('/', function(req, res, next) {
-    res.sendfile(__dirname+'/index.html');
+    res.sendfile(__dirname+'/index2.html');
  });
+
+ app.get('/productList', function(req, res, next) {
+    res.sendfile(__dirname+'/product.html');
+ });
+
  app.use('/product', Product);  
 
 server.listen(4000, () => console.log('Server running on port ....'));
