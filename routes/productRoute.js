@@ -34,15 +34,20 @@ router.get('/productListNotDone', function(req, res, next) {
 }); 
 
 router.put('/:id', function(req, res, next) { 
-    var io = req.app.get("socketio");
-    io.emit("message", "Tirawat!");
-    myskinre.updateTask(req.params.id, req.body, function(err, rows) {  
+    
+   const product = myskinre.updateTask(req.params.id, req.body, function(err, rows) {  
         if (err) {  
             res.json(err);  
         } else {  
-            res.json(rows);
+            var io = req.app.get("socketio");
+    io.emit("message", product);
+            res.json({
+                rows,
+                
+            });
         }  
     });  
+    
 });
 
 router.get('/:id?', function(req, res, next) {  

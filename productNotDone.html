@@ -52,7 +52,7 @@ function show(data) {
       `;
 
     for (let r of data.rows) {
-        tab += `
+         tab += `
         <tbody>
         
       <tr> 
@@ -63,10 +63,12 @@ function show(data) {
       </tbody>
       `;
     }
-  
-      document.getElementById("employees").innerHTML = tab;
-      socket.on("message", (data) => {
-        location.reload();
+   
+       document.getElementById("employees").innerHTML = tab;
+
+       socket.on("message", (product) => {
+        console.log(product)
+        // location.reload();
       })
 }
 

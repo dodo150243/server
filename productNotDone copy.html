@@ -65,8 +65,16 @@ function show(data) {
     }
   
       document.getElementById("employees").innerHTML = tab;
+     
       socket.on("message", (data) => {
-        location.reload();
+        // location.reload();
+
+        $(document).ready(function(){
+  // $("#btn2").click(function(){
+    $("tr").prepend("<td>Prepended item</td>");
+  // });
+});
+
       })
 }
 

@@ -49,8 +49,9 @@ function show(data) {
     }
   
       document.getElementById("employees").innerHTML = tab;
-      socket.on("message", (data) => {
-        location.reload();
+      socket.on("message", (product) => {
+        console.log(product)
+        // location.reload();
       })
 }
 

@@ -1,10 +1,10 @@
 const db = require('../dbconnection'); //reference of dbconnection.js  
 const myskinre = {  
     getAllOrderDone: function(callback) {  
-        return db.query(`SELECT id_order, COUNT(id_task) AS items FROM control_doe WHERE id_task GROUP BY id_order HAVING COUNT(id_task) = COUNT(done_on);`, callback);  
+        return db.query(`SELECT id_order, COUNT(id_task) AS items FROM control_doe WHERE id_task GROUP BY id_order HAVING COUNT(id_task) = COUNT(done_on) ORDER BY done_on DESC;`, callback);  
     },  
     getAllOrderNotDone: function(callback) {  
-        return db.query(`SELECT id_order,COUNT(id_task) AS items,COUNT(done_on) AS done, COUNT(id_task)-COUNT(done_on) as deficit from control_doe WHERE id_task GROUP BY id_order HAVING COUNT(id_task)-COUNT(done_on);`, callback);  
+        return db.query(`SELECT id_order,COUNT(id_task) AS items,COUNT(done_on) AS done, COUNT(id_task)-COUNT(done_on) as deficit from control_doe WHERE id_task GROUP BY id_order HAVING COUNT(id_task)-COUNT(done_on) ORDER BY done_on DESC;`, callback);  
     },  
     // getTaskById: function(id, callback) {  
     //     return db.query("select id_task, done_on from control_doe where id_task=?", [id], callback);  
