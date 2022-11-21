@@ -18,9 +18,24 @@ router.get('/productListDone', function(req, res, next) {
           
 });  
 
+router.get('/productListNotDone', function(req, res, next) {  
+    //  var io = req.app.get("socketio");
+    // io.emit("message", "hi!");
+    
+    myskinre.getAllOrderNotDone(function(err, rows) {  
+            if (err) {  
+                res.json(err);  
+            } else {  
+                res.json({rows});  
+                console.log(rows)  
+            }  
+        });  
+          
+}); 
+
 router.put('/:id', function(req, res, next) { 
     var io = req.app.get("socketio");
-    io.emit("message", "hi!");
+    io.emit("message", "Tirawat!");
     myskinre.updateTask(req.params.id, req.body, function(err, rows) {  
         if (err) {  
             res.json(err);  

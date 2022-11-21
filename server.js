@@ -27,9 +27,14 @@ app.get('/', function(req, res, next) {
     res.sendfile(__dirname+'/index2.html');
  });
 
- app.get('/productList', function(req, res, next) {
-    res.sendfile(__dirname+'/product.html');
+ app.get('/productDone', function(req, res, next) {
+    res.sendfile(__dirname+'/productDone.html');
  });
+
+ app.get('/productNotDone', function(req, res, next) {
+    res.sendfile(__dirname+'/productNotDone.html');
+ });
+
 
  app.use('/product', Product);  
 
