@@ -56,7 +56,7 @@ function show(data) {
         <tbody>
         
       <tr> 
-    <td>${r.id_order}</td>
+    <td id="">${r.id_order}</td>
     <td>${r.done} รายการ</td>
     <td>ขาด ${r.deficit}</td>
 </tr>
@@ -66,8 +66,8 @@ function show(data) {
    
        document.getElementById("employees").innerHTML = tab;
 
-       socket.on("message", (product) => {
-        console.log(product)
+       socket.on("UpdateOrder", (data) => {
+        console.log(data)
         // location.reload();
       })
 }
@@ -84,7 +84,10 @@ function show(data) {
 
     <h4>product is not complete</h4>
     <div class="tableNotDone">
-    <table id="employees" class="table"></table>
+    <table id="employees" class="table">
+
+      
+    </table>
   </div>
 
    

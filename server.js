@@ -1,6 +1,5 @@
 
 var express = require('express');  
-var Product = require('./routes/productRoute');  
 const app = require('express')();
 var path = require('path');  
 var morgan = require('morgan');
@@ -23,31 +22,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 const io = require('socket.io')(server);
 app.set("socketio", io);
 
-app.get('/', function(req, res, next) {
-    res.sendfile(__dirname+'/index2.html');
- });
+// app.get('/', function(req, res, next) {
+//     res.sendfile(__dirname+'/index.html');
+//  });
 
- app.get('/productDone', function(req, res, next) {
-    res.sendfile(__dirname+'/productDone.html');
- });
+//  app.get('/productDone', function(req, res, next) {
+//     res.sendfile(__dirname+'/productDone.html');
+//  });
 
- app.get('/productNotDone', function(req, res, next) {
-    res.sendfile(__dirname+'/productNotDone.html');
- });
+//  app.get('/productNotDone', function(req, res, next) {
+//     res.sendfile(__dirname+'/productNotDone.html');
+//  });
 
+app.use("/product", require('./routes/productRoute'))
+app.use((err, req, res, next)=>{
+   console.log(err.stack);
+   console.log(err.name);
+   console.log(err.code);
 
- app.use('/product', Product);  
+   res.status(500).json({
+      message: "something went rely wrong"
+   })
+})
 
 server.listen(4000, () => console.log('Server running on port ....'));
 
-
-
-// const express = require('express'); // using express
-// const socketIO = require('socket.io');
-// const http = require('http')
-// const port = process.env.PORT||4000 // setting the port
-// let app = express();
-// let server = http.createServer(app)
-// let io = socketIO(server)
- 
-// server.listen(port);

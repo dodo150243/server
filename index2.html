@@ -22,7 +22,8 @@
 //     console.log('Connected!');
 
 // });
-socket.on("message", (arg) => {
+socket.on("message", (result) => {
+console.log(result)
   var str=`<tr>
           <th>id_order</th>
           <th>item</th>

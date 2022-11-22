@@ -1,11 +1,11 @@
 const express = require('express');  
-const { Socket } = require('socket.io-client');
 const router = express.Router();  
 const myskinre = require('../model/myskinre');  
+const orderController = require('../controllers/orderController')
+
+router.route('/:id').patch(orderController.updateOrder)
 
 router.get('/productListDone', function(req, res, next) {  
-    //  var io = req.app.get("socketio");
-    // io.emit("message", "hi!");
     
     myskinre.getAllOrderDone(function(err, rows) {  
             if (err) {  
@@ -33,22 +33,20 @@ router.get('/productListNotDone', function(req, res, next) {
           
 }); 
 
-router.put('/:id', function(req, res, next) { 
+// router.put('/:id', function(req, res, next) { 
     
-   const product = myskinre.updateTask(req.params.id, req.body, function(err, rows) {  
-        if (err) {  
-            res.json(err);  
-        } else {  
-            var io = req.app.get("socketio");
-    io.emit("message", product);
-            res.json({
-                rows,
+//     myskinre.updateTask(req.params.id, req.body, function(err, rows) {  
+//         if (err) {  
+//             res.json(err);  
+//         } else {  
+//             res.json({
+//                 rows,
                 
-            });
-        }  
-    });  
+//             });
+//         }  
+//     });  
     
-});
+// });
 
 router.get('/:id?', function(req, res, next) {  
         myskinre.getTaskById(req.params.id, function(err, rows) {  
