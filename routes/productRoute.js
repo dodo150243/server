@@ -2,51 +2,58 @@ const express = require('express');
 const router = express.Router();  
 const myskinre = require('../model/myskinre');  
 const orderController = require('../controllers/orderController')
-
-router.route('/:id').patch(orderController.updateOrder)
+const db = require('../dbconnection');
+// router.route('/:id').put(orderController.updateOrder)
 
 router.get('/productListDone', function(req, res, next) {  
-    
-    myskinre.getAllOrderDone(function(err, rows) {  
-            if (err) {  
-                res.json(err);  
-            } else {  
-                res.json({rows});  
-                console.log(rows)  
-            }  
-        });  
-          
+
+myskinre.getAllOrderDone(function(err, result) {  
+        if (err) {  
+        res.json(err);  
+        } else {  
+        res.json(result);  
+            
+        }  
+    });  
+        
 });  
 
 router.get('/productListNotDone', function(req, res, next) {  
     //  var io = req.app.get("socketio");
     // io.emit("message", "hi!");
     
-    myskinre.getAllOrderNotDone(function(err, rows) {  
+    myskinre.getAllOrderNotDone(function(err, result) {  
             if (err) {  
                 res.json(err);  
             } else {  
-                res.json({rows});  
-                console.log(rows)  
+                res.json(result);  
+                
             }  
         });  
           
 }); 
 
-// router.put('/:id', function(req, res, next) { 
+router.put('/:id', function(req, res, next) { 
+    var io = req.app.get("socketio");
+    myskinre.updateTask(req.params.id, req.body, function(err, rows) {  
+        if (err) {  
+            res.json(err);  
+        } else {  
+        //    db.query(`select * from control_doe WHERE id_task=${req.params.id};`,(err,result)=>{
+            db.query(`select * from control_doe WHERE id_task=${req.params.id};`,(err,result)=>{
+        if(err){
+                console.log(err)
+            }else{
+                 io.emit("UpdateOrder", (result));
+                res.json(result)
+            }
+            
+          })
+          
+        }  
+    });  
     
-//     myskinre.updateTask(req.params.id, req.body, function(err, rows) {  
-//         if (err) {  
-//             res.json(err);  
-//         } else {  
-//             res.json({
-//                 rows,
-                
-//             });
-//         }  
-//     });  
-    
-// });
+});
 
 router.get('/:id?', function(req, res, next) {  
         myskinre.getTaskById(req.params.id, function(err, rows) {  

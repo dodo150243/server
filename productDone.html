@@ -29,6 +29,7 @@
          hideloader();      
       }
           show(data);
+          upProduct(data)
     }
       getapi(api_url);
 
@@ -37,28 +38,63 @@ function hideloader() {
 document.getElementById('loading').style.display = 'none';
 }
 
+// function show(data) {
+//     let tab = 
+//         `<tr id="connection">
+//           <th>id_order</th>
+//           <th>item</th>
+         
+//          </tr>`;
+
+//     for (let r of data) {
+//         tab += `<tr> 
+//     <td>${r.id_order} </td>
+//     <td>${r.items} รายการ</td>
+       
+// </tr>`;
+//     }
+    
+//       document.getElementById("employees").innerHTML = tab;
+     
+// }
 function show(data) {
     let tab = 
-        `<tr>
+        `<tr id="connection">
           <th>id_order</th>
           <th>item</th>
          
          </tr>`;
 
-    for (let r of data.rows) {
+    for (let r of data) {
         tab += `<tr> 
     <td>${r.id_order} </td>
     <td>${r.items} รายการ</td>
        
 </tr>`;
     }
-  
+    
       document.getElementById("employees").innerHTML = tab;
-      socket.on("UpdateOrder", (data) => {
-        console.log(data)
-        // location.reload();
-      })
+     
 }
+
+function upProduct(data) {
+socket.on("UpdateOrder", (result) => {
+         console.log(result[0].id_order)
+         if(result[0].id_order==data[0].id_order){
+
+          console.log("เท่า")
+
+         }
+      // console.log(data[i].id_order)
+                $('#connection').after(`
+                
+              <tr> 
+              <td>${"my3"}</td>
+              <td>${"2"} รายการ</td>
+              </tr>`);
+        
+      })
+    }
 
   </script>
   <body>
@@ -69,10 +105,11 @@ function show(data) {
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-
+    <!-- <input id="connection" type="text"> -->
     <h4>complete product</h4>
-    <table id="employees" class="table"></table>
-
+    <table id="employees" class="table">
+      
+    </table>
 
   </body>
 </html>

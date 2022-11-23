@@ -50,13 +50,13 @@ function show(data) {
          </tr>
       </thead>
       `;
-
-    for (let r of data.rows) {
+     
+    for (let r of data.result) {  
          tab += `
         <tbody>
         
-      <tr> 
-    <td id="">${r.id_order}</td>
+      <tr id="${r.id_order}"> 
+    <td>${r.id_order}</td>
     <td>${r.done} รายการ</td>
     <td>ขาด ${r.deficit}</td>
 </tr>
@@ -66,11 +66,13 @@ function show(data) {
    
        document.getElementById("employees").innerHTML = tab;
 
-       socket.on("UpdateOrder", (data) => {
-        console.log(data)
-        // location.reload();
-      })
 }
+
+    socket.on("UpdateOrder", (data) => {
+        console.log(data)
+        $('#connection').val('con');
+      })
+
 
   </script>
   <body>
@@ -81,7 +83,7 @@ function show(data) {
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-
+    
     <h4>product is not complete</h4>
     <div class="tableNotDone">
     <table id="employees" class="table">

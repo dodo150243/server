@@ -16,23 +16,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({  
     extended: false  
 }));  
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(cookieParser());  
 app.use(express.static(path.join(__dirname, 'public')));  
 
 const io = require('socket.io')(server);
 app.set("socketio", io);
 
-// app.get('/', function(req, res, next) {
-//     res.sendfile(__dirname+'/index.html');
-//  });
+app.get('/', function(req, res, next) {
+    res.sendfile(__dirname+'/index.html');
+ });
 
-//  app.get('/productDone', function(req, res, next) {
-//     res.sendfile(__dirname+'/productDone.html');
-//  });
+ app.get('/productDone', function(req, res, next) {
+    res.sendfile(__dirname+'/productDone.html');
+ });
 
-//  app.get('/productNotDone', function(req, res, next) {
-//     res.sendfile(__dirname+'/productNotDone.html');
-//  });
+ app.get('/productNotDone', function(req, res, next) {
+    res.sendfile(__dirname+'/productNotDone.html');
+ });
 
 app.use("/product", require('./routes/productRoute'))
 app.use((err, req, res, next)=>{
