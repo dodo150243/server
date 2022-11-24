@@ -6,9 +6,16 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors'); 
+const { Server } = require('socket.io')
 
-const http = require('http');
-const server = http.createServer(app);
+const { createServer } = require('http') 
+// const http = require('http');
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+   cors: true,
+   origins: ['http://locahost:4000']
+ })
+app.set("socketio", io);
 
 app.use(cors());  
 app.use(morgan('dev'));  
@@ -22,8 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());  
 app.use(express.static(path.join(__dirname, 'public')));  
 
-const io = require('socket.io')(server);
-app.set("socketio", io);
+
 
 app.get('/', function(req, res, next) {
     res.sendfile(__dirname+'/index.html');
@@ -48,5 +54,43 @@ app.use((err, req, res, next)=>{
    })
 })
 
-server.listen(4000, () => console.log('Server running on port ....'));
+io.on('connection', (socket) => {
+   console.log('New client connected')
+   socket.emit('FromAPI', 'Hello socket.io')
+   socket.on('disconnect', () => {
+     console.log('Client disconnected')
+   })
+ })
 
+httpServer.listen(4000, () => console.log('Server running on port ....'));
+
+// const express =require('express') 
+// const { createServer } =require('http') 
+// const { Server } =require('socket.io') 
+// const cors =require('cors') 
+
+// const app = express()
+// const httpServer = createServer(app)
+
+// const io = new Server(httpServer, {
+//    cors: true,
+//    origins: ['http://locahost:4000']
+//  })
+
+
+// app.use(cors())
+
+// app.use("/product", require('./routes/productRoute'))
+
+// // app.use('/apiLink/process', processes)
+
+// io.on('connection', (socket) => {
+//   console.log('New client connected')
+//   socket.emit('FromAPI', 'Hello socket.io')
+//   socket.on('disconnect', () => {
+//     console.log('Client disconnected')
+//   })
+// })
+
+
+// httpServer.listen(4000, () => console.log(`Socket.io test running on port 4000`))

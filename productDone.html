@@ -65,7 +65,7 @@ function show(data) {
          
          </tr>`;
 
-    for (let r of data) {
+    for (let r of data.result) {
         tab += `<tr> 
     <td>${r.id_order} </td>
     <td>${r.items} รายการ</td>
@@ -78,13 +78,9 @@ function show(data) {
 }
 
 function upProduct(data) {
-socket.on("UpdateOrder", (result) => {
-         console.log(result[0].id_order)
-         if(result[0].id_order==data[0].id_order){
-
-          console.log("เท่า")
-
-         }
+socket.on("UpdateOrder", ({result}) => {
+         console.log(result)
+         
       // console.log(data[i].id_order)
                 $('#connection').after(`
                 

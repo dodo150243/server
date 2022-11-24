@@ -5,6 +5,7 @@ const orderController = require('../controllers/orderController')
 const db = require('../dbconnection');
 // router.route('/:id').put(orderController.updateOrder)
 
+
 router.get('/productListDone', function(req, res, next) {  
 
 myskinre.getAllOrderDone(function(err, result) {  
@@ -40,6 +41,7 @@ router.put('/:id', function(req, res, next) {
             res.json(err);  
         } else {  
         //    db.query(`select * from control_doe WHERE id_task=${req.params.id};`,(err,result)=>{
+
             db.query(`select * from control_doe WHERE id_task=${req.params.id};`,(err,result)=>{
         if(err){
                 console.log(err)
@@ -49,6 +51,7 @@ router.put('/:id', function(req, res, next) {
             }
             
           })
+
           
         }  
     });  

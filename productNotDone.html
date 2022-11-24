@@ -51,7 +51,7 @@ function show(data) {
       </thead>
       `;
      
-    for (let r of data.result) {  
+    for (let r of data) {  
          tab += `
         <tbody>
         
@@ -74,6 +74,8 @@ function show(data) {
       })
 
 
+     
+
   </script>
   <body>
     
@@ -92,6 +94,16 @@ function show(data) {
     </table>
   </div>
 
-   
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <table id="myTable">
+          <tr id="x" class="someClass"><td>Click Me 1</td></tr>
+          <tr id="y" class="someClass"><td>Click Me 2</td></tr>
+      <table>
   </body>
+  <script>
+     $('#myTable').on('click', '.someClass',function () {
+        var trID=$(this).attr('id');
+        $(this).find('td').append(new Date());//replace this with your AJAX call
+    });
+  </script>
 </html>
