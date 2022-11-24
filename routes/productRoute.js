@@ -7,8 +7,7 @@ const db = require('../dbconnection');
 
 
 router.get('/productListDone', function(req, res, next) {  
-
-myskinre.getAllOrderDone(function(err, result) {  
+    myskinre.getAllOrderDone(function(err, result) {  
         if (err) {  
         res.json(err);  
         } else {  
@@ -20,9 +19,6 @@ myskinre.getAllOrderDone(function(err, result) {
 });  
 
 router.get('/productListNotDone', function(req, res, next) {  
-    //  var io = req.app.get("socketio");
-    // io.emit("message", "hi!");
-    
     myskinre.getAllOrderNotDone(function(err, result) {  
             if (err) {  
                 res.json(err);  
@@ -40,8 +36,6 @@ router.put('/:id', function(req, res, next) {
         if (err) {  
             res.json(err);  
         } else {  
-        //    db.query(`select * from control_doe WHERE id_task=${req.params.id};`,(err,result)=>{
-
             db.query(`select * from control_doe WHERE id_task=${req.params.id};`,(err,result)=>{
         if(err){
                 console.log(err)
@@ -51,7 +45,6 @@ router.put('/:id', function(req, res, next) {
             }
             
           })
-
           
         }  
     });  
@@ -67,5 +60,6 @@ router.get('/:id?', function(req, res, next) {
             }  
         });  
     } );
+
 
 module.exports = router;  
