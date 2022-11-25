@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const myskinre = require("../model/myskinre");
-const orderController = require("../controllers/orderController");
 const db = require("../dbconnection");
-// router.route('/:id').put(orderController.updateOrder)
 
 router.get("/productListDone", function (req, res, next) {
   myskinre.getAllOrderDone(function (err, result) {

@@ -6,9 +6,7 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var cors = require("cors");
 const { Server } = require("socket.io");
-
 const { createServer } = require("http");
-// const http = require('http');
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: true,
@@ -30,16 +28,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", function (req, res, next) {
+app.get("/test", function (req, res, next) {
   res.sendfile(__dirname + "/index.html");
-});
-
-app.get("/productDone", function (req, res, next) {
-  res.sendfile(__dirname + "/productDone.html");
-});
-
-app.get("/productNotDone", function (req, res, next) {
-  res.sendfile(__dirname + "/productNotDone.html");
 });
 
 app.use("/product", require("./routes/productRoute"));
@@ -61,4 +51,4 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(4000, () => console.log("Server running on port ...."));
+httpServer.listen(4000, () => console.log("Server running on port..."));
